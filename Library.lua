@@ -32,7 +32,7 @@ local Library = {
     FontColor = Color3.fromRGB(255, 255, 255);
     MainColor = Color3.fromRGB(28, 28, 28);
     BackgroundColor = Color3.fromRGB(20, 20, 20);
-    AccentColor = Color3.fromRGB(0, 85, 255);
+    AccentColor = Color3.fromRGB(27, 208, 232);
     OutlineColor = Color3.fromRGB(50, 50, 50);
     RiskColor = Color3.fromRGB(255, 50, 50),
 
@@ -2984,6 +2984,7 @@ function Library:CreateWindow(...)
         ZIndex = 2;
         Parent = MainSectionInner;
     });
+    
 
     Library:AddToRegistry(TabContainer, {
         BackgroundColor3 = 'MainColor';
@@ -2992,35 +2993,7 @@ function Library:CreateWindow(...)
 
     function Window:SetWindowTitle(Title)
         WindowLabel.Text = Title;
-    end
-
-    local index = 1
-    local delayTime = 0.1
-    local reverse = false
-
-    task.spawn(function()
-        while true do
-            WindowLabel.Text = Config.Title:sub(1, index)
-
-            if reverse then
-                index = index - 1
-            else
-                index = index + 1
-            end
-
-            if index > #Config.Title then
-                reverse = true
-                index = #Config.Title
-            elseif index == 0 then
-                reverse = false
-                index = 1
-            end
-
-            task.wait(delayTime)
-        end
-    end)
-end
-
+    end;
 
     function Window:AddTab(Name)
         local Tab = {
