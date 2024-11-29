@@ -4,7 +4,7 @@ local ThemeManager = {} do
 
 	ThemeManager.Library = nil
 	ThemeManager.BuiltInThemes = {
-	['Default'] 	    = { 1, httpService:JSONDecode('{"MainColor":"212e2d","AccentColor":"1bcfe8","OutlineColor":"504f4f","BackgroundColor":"243235","FontColor":"ffffff"}') },
+	['Default'] 	    = { 1, httpService:JSONDecode('{"MainColor":"222323","AccentColor":"1bcfe8","OutlineColor":"343333","BackgroundColor":"202020","FontColor":"ffffff"}') },
         ['Aqua Pulse']      = { 2, httpService:JSONDecode('{"MainColor":"1a2a2f","AccentColor":"19b9ff","OutlineColor":"3b4b4f","BackgroundColor":"22303b","FontColor":"ffffff"}') },
         ['Midnight Wave']   = { 3, httpService:JSONDecode('{"MainColor":"101820","AccentColor":"0f5e9c","OutlineColor":"2c3d4f","BackgroundColor":"18222d","FontColor":"d4d4d4"}') },
         ['Blush Ember']     = { 4, httpService:JSONDecode('{"FontColor":"ffffff","MainColor":"27262d","AccentColor":"c94d68","BackgroundColor":"1c1b21","OutlineColor":"383838"}') },
