@@ -3503,17 +3503,12 @@ function Library:CreateWindow(...)
         blurEffect.Name = "BlurEffect"
         blurEffect.Parent = game.Lighting
     
-        local Cache = TransparencyCache[Desc];
-    
-        if (not Cache) then
-            Cache = {};
-            TransparencyCache[Desc] = Cache;
-        end;
-    
         if Toggled then
-            TweenService:Create(blurEffect, TweenInfo.new(FadeTime, Enum.EasingStyle.Linear), { Size = 15 }):Play()  -- Increase blur size when toggled
+            -- Fade in the blur effect
+            TweenService:Create(blurEffect, TweenInfo.new(FadeTime, Enum.EasingStyle.Linear), { Size = 24 }):Play() -- Apply blur
         else
-            TweenService:Create(blurEffect, TweenInfo.new(FadeTime, Enum.EasingStyle.Linear), { Size = 0 }):Play()  -- Remove blur when toggled off
+            -- Fade out the blur effect
+            TweenService:Create(blurEffect, TweenInfo.new(FadeTime, Enum.EasingStyle.Linear), { Size = 0 }):Play() -- Remove blur
         end
     
         for _, Desc in next, Outer:GetDescendants() do
