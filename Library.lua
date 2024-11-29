@@ -2885,7 +2885,7 @@ function Library:Notify(Text, Time)
         Position = UDim2.new(0, 0, 0, 0); -- Align with the top edge of the WatermarkOuter
         Size = UDim2.new(1, 0, 0, 3); -- Full width with a height of 3 pixels
         ZIndex = 202; -- Match the ZIndex hierarchy for proper layering
-        Parent = WatermarkOuter;
+        Parent = NotifyOuter;
     });
 
     Library:AddToRegistry(LeftColor, {
@@ -3020,7 +3020,6 @@ function Library:CreateWindow(...)
         ZIndex = 2;
         Parent = MainSectionInner;
     });
-    
 
     Library:AddToRegistry(TabContainer, {
         BackgroundColor3 = 'MainColor';
@@ -3029,7 +3028,34 @@ function Library:CreateWindow(...)
 
     function Window:SetWindowTitle(Title)
         WindowLabel.Text = Title;
-    end;
+    end
+
+    local index = 1
+    local delayTime = 0.1
+    local reverse = false
+
+    task.spawn(function()
+        while true do
+            WindowLabel.Text = Config.Title:sub(1, index)
+
+            if reverse then
+                index = index - 1
+            else
+                index = index + 1
+            end
+
+            if index > #Config.Title then
+                reverse = true
+                index = #Config.Title
+            elseif index == 0 then
+                reverse = false
+                index = 1
+            end
+
+            task.wait(delayTime)
+        end
+    end)
+end
 
     function Window:AddTab(Name)
         local Tab = {
