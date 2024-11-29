@@ -8,33 +8,6 @@ local TweenService = game:GetService('TweenService');
 local RenderStepped = RunService.RenderStepped;
 local LocalPlayer = Players.LocalPlayer;
 local Mouse = LocalPlayer:GetMouse();
-local index = 1
-local delayTime = 0.1
-local reverse = false
-
-task.spawn(function()
-    while true do
-        WindowLabel.Text = Config.Title:sub(1, index)
-
-        if reverse then
-            index = index - 1
-        else
-            index = index + 1
-        end
-
-        if index > #Config.Title then
-            reverse = true
-            index = #Config.Title
-        elseif index == 0 then
-            reverse = false
-            index = 1
-        end
-
-        task.wait(delayTime)
-    end
-end)
-
-
 
 local ProtectGui = protectgui or (syn and syn.protect_gui) or (function() end);
 -- hi
@@ -59,7 +32,7 @@ local Library = {
     FontColor = Color3.fromRGB(255, 255, 255);
     MainColor = Color3.fromRGB(28, 28, 28);
     BackgroundColor = Color3.fromRGB(20, 20, 20);
-    AccentColor = Color3.fromRGB(27, 208, 232);
+    AccentColor = Color3.fromRGB(0, 85, 255);
     OutlineColor = Color3.fromRGB(50, 50, 50);
     RiskColor = Color3.fromRGB(255, 50, 50),
 
@@ -2668,18 +2641,9 @@ do
         Parent = ScreenGui;
     });
 
-    local TopBarLine = Library:Create('Frame', {
-        BackgroundColor3 = Library.AccentColor; -- Adjust color as needed
-        Size = UDim2.new(1, 0, 0, 2); -- Full width, small height (2 pixels)
-        Position = UDim2.new(0, 0, 0, 0); -- Positioned at the top of the watermark
-        BorderSizePixel = 0;
-        ZIndex = 202;
-        Parent = WatermarkOuter;
-    });
-
     local WatermarkInner = Library:Create('Frame', {
         BackgroundColor3 = Library.MainColor;
-        BorderColor3 = Library.MainColor;
+        BorderColor3 = Library.AccentColor;
         BorderMode = Enum.BorderMode.Inset;
         Size = UDim2.new(1, 0, 1, 0);
         ZIndex = 201;
@@ -2687,7 +2651,7 @@ do
     });
 
     Library:AddToRegistry(WatermarkInner, {
-        BorderColor3 = 'MainColor';
+        BorderColor3 = 'AccentColor';
     });
 
     local InnerFrame = Library:Create('Frame', {
@@ -2879,12 +2843,12 @@ function Library:Notify(Text, Time)
         Parent = InnerFrame;
     });
 
-    local TopBarLine = Library:Create('Frame', {
-        BackgroundColor3 = Library.AccentColor; -- Keep the same color
+    local LeftColor = Library:Create('Frame', {
+        BackgroundColor3 = Library.AccentColor;
         BorderSizePixel = 0;
-        Position = UDim2.new(0, 0, 0, 0); -- Align with the top edge of the WatermarkOuter
-        Size = UDim2.new(1, 0, 0, 3); -- Full width with a height of 3 pixels
-        ZIndex = 202; -- Match the ZIndex hierarchy for proper layering
+        Position = UDim2.new(0, -1, 0, -1);
+        Size = UDim2.new(0, 3, 1, 2);
+        ZIndex = 104;
         Parent = NotifyOuter;
     });
 
@@ -2947,7 +2911,7 @@ function Library:CreateWindow(...)
 
     local Inner = Library:Create('Frame', {
         BackgroundColor3 = Library.MainColor;
-        BorderColor3 = Library.AccentColor;
+        BorderColor3 = Library.MainColor;
         BorderMode = Enum.BorderMode.Inset;
         Position = UDim2.new(0, 1, 0, 1);
         Size = UDim2.new(1, -2, 1, -2);
@@ -2957,7 +2921,7 @@ function Library:CreateWindow(...)
 
     Library:AddToRegistry(Inner, {
         BackgroundColor3 = 'MainColor';
-        BorderColor3 = 'AccentColor';
+        BorderColor3 = 'MainColor';
     });
 
     local WindowLabel = Library:CreateLabel({
@@ -3056,6 +3020,7 @@ function Library:CreateWindow(...)
         end
     end)
 end
+
 
     function Window:AddTab(Name)
         local Tab = {
